@@ -1,0 +1,55 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">#include &lt;iostream&gt;</span>
+<span style="color: #557799">#include &lt;fstream&gt;</span>
+<span style="color: #557799">#include &lt;sstream&gt;</span>
+<span style="color: #557799">#include &lt;vector&gt;</span>
+<span style="color: #888888">// #include &lt;cstdlib&gt;</span>
+
+<span style="color: #008800; font-weight: bold">using</span> <span style="color: #008800; font-weight: bold">namespace</span> std;
+
+vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> extract_numbers(<span style="color: #008800; font-weight: bold">const</span> string <span style="color: #333333">&amp;</span>s, <span style="color: #333399; font-weight: bold">char</span> delim) {
+	stringstream ss(s);
+	string item;
+	<span style="color: #333399; font-weight: bold">int</span> x;
+	vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> v;
+
+	<span style="color: #008800; font-weight: bold">while</span> (getline(ss, item, delim)) {
+		x <span style="color: #333333">=</span> stoi(item);
+		v.push_back(x);
+	}
+	<span style="color: #008800; font-weight: bold">return</span> v;
+}
+
+vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> to_binary(<span style="color: #333399; font-weight: bold">int</span> x) {
+	vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> v;
+
+	<span style="color: #008800; font-weight: bold">do</span> {
+		v.push_back(x <span style="color: #333333">&amp;</span> <span style="color: #0000DD; font-weight: bold">1</span>);
+	} <span style="color: #008800; font-weight: bold">while</span>(x <span style="color: #333333">&gt;&gt;=</span> <span style="color: #0000DD; font-weight: bold">1</span>);
+
+	<span style="color: #008800; font-weight: bold">return</span> v;
+}
+
+<span style="color: #333399; font-weight: bold">int</span> main(<span style="color: #333399; font-weight: bold">int</span> argc, <span style="color: #333399; font-weight: bold">char</span> <span style="color: #333333">*</span>argv[]) {
+	ifstream reader;
+	reader.open(argv[<span style="color: #0000DD; font-weight: bold">1</span>]);
+	vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> v;
+	vector<span style="color: #333333">&lt;</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">&gt;</span> binary_num;
+	string str;
+	<span style="color: #333399; font-weight: bold">int</span> x, y;
+
+	<span style="color: #008800; font-weight: bold">while</span> (getline(reader, str)) {
+		v <span style="color: #333333">=</span> extract_numbers(str, <span style="color: #0044DD">&#39;,&#39;</span>);
+		binary_num <span style="color: #333333">=</span> to_binary(v[<span style="color: #0000DD; font-weight: bold">0</span>]);
+		x <span style="color: #333333">=</span> binary_num[(v[<span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>)];
+		y <span style="color: #333333">=</span> binary_num[(v[<span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>)];
+
+		<span style="color: #008800; font-weight: bold">if</span> (x <span style="color: #333333">==</span> y) {
+			cout <span style="color: #333333">&lt;&lt;</span> <span style="background-color: #fff0f0">&quot;true&quot;</span> <span style="color: #333333">&lt;&lt;</span> endl;
+		}	<span style="color: #008800; font-weight: bold">else</span> {
+			cout <span style="color: #333333">&lt;&lt;</span> <span style="background-color: #fff0f0">&quot;false&quot;</span> <span style="color: #333333">&lt;&lt;</span> endl;
+		}
+		v.clear();
+		binary_num.clear();
+	}
+}
+</pre></div>
