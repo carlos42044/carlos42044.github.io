@@ -3,9 +3,11 @@ html {
 /*	display: inline;
 */}
 
+
 body {
-	width: 100%;
-	margin: 0 auto;
+	/*width: 100%;*/
+	/*margin: 0 auto;*/
+	background: url(img/goat_wallpaper.png) repeat;
 }
 
 a:hover {
